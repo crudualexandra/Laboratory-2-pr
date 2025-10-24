@@ -99,9 +99,9 @@ time N=10 bash tests/spawn_client_requests.sh localhost 8001 /books/
 
 ```
 
-![image.png](Laboratory%202/image%205.png)
+![image.png](Laboratory%202/image%2018.png)
 
-![image.png](Laboratory%202/image%206.png)
+
 
 The server runs single-threaded and handles 10 concurrent requests sequentially (≈ N×delay total), establishing the baseline.
 
@@ -130,7 +130,7 @@ time N=10 bash tests/spawn_client_requests.sh localhost 8001 /books/
 
 ```
 
-![image.png](Laboratory%202/image%209.png)
+![image.png](Laboratory%202/image%2019.png)
 
 The server runs with a thread pool and completes the same 10 concurrent requests faster than the baseline, proving parallel handling.
 
