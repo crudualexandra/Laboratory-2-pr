@@ -140,6 +140,13 @@ The server runs with a thread pool and completes the same 10 concurrent requests
 
 **C1) Naive counter (race on purpose)**
 ```bash
+val = hits.get(path, 0)
+time.sleep(counter_sleep)     # intentional delay to interleave threads
+hits[path] = val + 1          # lost increments possible
+
+```
+test:
+```bash
 
 CID=$(docker compose run -d -p 8001:8001 web \
 python [server.py](http://server.py/) /app/site --host 0.0.0.0 --port 8001 \
@@ -181,6 +188,11 @@ Under concurrent requests the Hits value increases by less than the actual reque
 **Requirement:** ✅ Race condition on shared state is clearly demonstrated.
 
 **C2) Locked counter (race fixed)**
+```bash
+with hit_lock:
+    hits[path] = hits.get(path, 0) + 1
+```
+test:
 ```bash
 
 CID=$(docker compose run -d -p 8001:8001 web \
